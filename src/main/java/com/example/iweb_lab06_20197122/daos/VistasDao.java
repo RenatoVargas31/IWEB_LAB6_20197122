@@ -33,8 +33,8 @@ public class VistasDao {
                 pelicula.setAnoPublicacion(rs.getInt(3));
                 pelicula.setRating(rs.getDouble(4));
                 pelicula.setBoxOffice(rs.getDouble(5));
-                genero.setNombre(rs.getString(6));
-                pelicula.setGenero(genero);
+                genero.setNombre(rs.getString(6)); //Se obtiene el nombre del género
+                pelicula.setGenero(genero);//Se asigna el género a la película
 
                 listaPeliculas.add(pelicula);
             }
