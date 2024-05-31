@@ -34,6 +34,7 @@ public class VistasDao {
                 pelicula.setRating(rs.getDouble(4));
                 pelicula.setBoxOffice(rs.getDouble(5));
                 genero.setNombre(rs.getString(6));
+                pelicula.setGenero(genero);
 
                 listaPeliculas.add(pelicula);
             }
