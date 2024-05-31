@@ -86,4 +86,44 @@ public class VistasDao {
 
         return listaPeliculas;
     }
+
+    public Pelicula obternerPeliculaPorId(int idPelicula){
+        Pelicula pelicula = new Pelicula();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String username = "root";
+        String password = "root";
+        //Ejecución de la consulta
+        String sql = "SELECT p.idPelicula, p.titulo, p.director, p.anoPublicacion, p.rating, p.boxOffice, g.nombre FROM Pelicula p JOIN Genero g ON p.idGenero = g.idGenero WHERE idPelicula = ?;";
+
+        try(Connection conn = DriverManager.getConnection(url, username, password);
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, idPelicula);
+
+            try(ResultSet rs = pstmt.executeQuery(sql);){
+                Genero genero = new Genero();
+
+                //Procesamiento
+                pelicula.setIdPelicula(rs.getInt(1));
+                pelicula.setTitulo(rs.getString(2));
+                pelicula.setDirector(rs.getString(3));
+                pelicula.setAnoPublicacion(rs.getInt(4));
+                pelicula.setRating(rs.getDouble(5));
+                pelicula.setBoxOffice(rs.getDouble(6));
+                genero.setNombre(rs.getString(7)); //Se obtiene el nombre del género
+                pelicula.setGenero(genero);//Se asigna el género a la película
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return pelicula;
+    }
 }
