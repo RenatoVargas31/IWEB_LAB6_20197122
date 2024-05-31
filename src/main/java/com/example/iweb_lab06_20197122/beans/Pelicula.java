@@ -8,6 +8,7 @@ public class Pelicula {
     private double rating;
     private double boxOffice;
     private int idGenero;
+    private Genero genero;
 
     public int getIdPelicula() {
         return idPelicula;
@@ -63,5 +64,13 @@ public class Pelicula {
 
     public void setIdGenero(int idGenero) {
         this.idGenero = idGenero;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
 }
